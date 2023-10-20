@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="20dp" />
+    <solid android:color="#cccccc" /> <!-- Color de fondo del botón cuando se presiona o se selecciona (gris en este ejemplo) -->
+</shape>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "698144793634",
+    "project_id": "casinoua-4996a",
+    "storage_bucket": "casinoua-4996a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:698144793634:android:25c550dc3e23a77115567b",
+        "android_client_info": {
+          "package_name": "com.example.casino"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDI8Sljs9VZi2JG9QVQva4NXQu6Iu8eMhg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
