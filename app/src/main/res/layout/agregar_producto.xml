@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nombre del producto"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColor="@color/grisoscuro"
+        android:textColorHint="@color/grisoscuro"
         android:fontFamily="@font/bree_serif"/>
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -21,28 +21,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Descripción del producto"
-        android:textColorHint="@color/black"
-        android:textColor="@color/black"
+        android:textColor="@color/grisoscuro"
+        android:textColorHint="@color/grisoscuro"
         android:fontFamily="@font/bree_serif"/>
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/editTextPrecio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/black"
         android:inputType="number"
         android:hint="Precio del producto"
-        android:textColor="@color/black"
+        android:textColor="@color/grisoscuro"
+        android:textColorHint="@color/grisoscuro"
         android:fontFamily="@font/bree_serif"/>
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/editTextCantidad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/black"
         android:inputType="number"
         android:hint="Cantidad del producto"
-        android:textColor="@color/black"
+        android:textColor="@color/grisoscuro"
+        android:textColorHint="@color/grisoscuro"
         android:fontFamily="@font/bree_serif"/>
 
     <!-- Spinner para seleccionar la categoría -->
@@ -53,8 +53,8 @@
         android:layout_gravity="center"
         android:background="@color/white"
         android:hint="@string/categor_a_del_producto"
-        android:textColorHint="@color/black"
-        android:textColor="@color/black" />
+        android:textColor="@color/grisoscuro"
+        android:textColorHint="@color/grisoscuro"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnguardar"
