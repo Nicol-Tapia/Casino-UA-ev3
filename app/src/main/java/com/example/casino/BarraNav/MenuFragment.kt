@@ -1,14 +1,23 @@
 package com.example.casino.BarraNav
 
-import android.content.Intent
+import android.os.Build
+import android.widget.ArrayAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.casino.Menus.MenuBebidas
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatSpinner
+import androidx.core.content.ContextCompat
+import com.example.casino.Productos
 import com.example.casino.R
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,19 +42,74 @@ class MenuFragment : Fragment() {
         }
     }
 
+    private lateinit var databaseReference: DatabaseReference
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false)
+        val view = inflater.inflate(R.layout.fragment_menu, container, false)
 
-        //ACa debe ir la logica del fragment
+        databaseReference = FirebaseDatabase.getInstance().reference.child("productos")
 
+        val agregarProductoButton = view.findViewById<AppCompatButton>(R.id.btnagregarproducto)
+        agregarProductoButton.setOnClickListener {
+            mostrarDialogoAgregarProducto()
+        }
 
-
+        return view
 
     }
+
+    private fun mostrarDialogoAgregarProducto() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.agregar_producto, null)
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setView(dialogView)
+
+        val editTextNombre = dialogView.findViewById<AppCompatEditText>(R.id.editTextNombre)
+        val editTextDescripcion = dialogView.findViewById<AppCompatEditText>(R.id.editTextDescripcion)
+        val editTextPrecio = dialogView.findViewById<AppCompatEditText>(R.id.editTextPrecio)
+        val editTextCantidad = dialogView.findViewById<AppCompatEditText>(R.id.editTextCantidad)
+        val spinnerCategoria = dialogView.findViewById<AppCompatSpinner>(R.id.spinnerCategoria)
+        val btnGuardar = dialogView.findViewById<AppCompatButton>(R.id.btnguardar)
+
+        val categorias = arrayOf("Bebidas", "Postres", "Almuerzos", "Frutas", "Comida Rápida", "Galletas", "Sandwich", "Té/Café")
+
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categorias)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCategoria.adapter = adapter
+
+        val dialog = builder.create()
+
+
+
+        dialog.show()
+
+        // Configura un clic en el botón Guardar
+        btnGuardar.setOnClickListener {
+            val nombre = editTextNombre.text.toString()
+            val descripcion = editTextDescripcion.text.toString()
+            val precio = editTextPrecio.text.toString().toDouble()
+            val cantidad = editTextCantidad.text.toString().toInt()
+            val categoria = spinnerCategoria.selectedItem.toString()
+
+            // Crea un objeto Producto con los datos ingresados
+            val producto = Productos(nombre, descripcion, precio, cantidad, categoria)
+
+            // Agrega el producto a la base de datos de Firebase
+            val productoKey = databaseReference.push().key
+            productoKey?.let {
+                databaseReference.child(it).setValue(producto)
+            }
+
+            // Cierra el cuadro de diálogo
+            dialog.dismiss()
+
+            // Puedes mostrar un mensaje de éxito aquí
+            Toast.makeText(requireContext(), "Producto agregado con éxito", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     companion object {
         /**
@@ -68,3 +132,4 @@ class MenuFragment : Fragment() {
     }
 
 }
+

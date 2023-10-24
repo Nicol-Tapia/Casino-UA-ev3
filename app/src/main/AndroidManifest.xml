@@ -21,45 +21,9 @@
         <activity
             android:name=".CambioContrasenia"
             android:exported="false" />
-        <activity
-            android:name=".Conf"
-            android:exported="false" />
-        <activity
-            android:name=".InicioSesionFijo"
-            android:exported="false" />
 
         <activity
             android:name=".InicioSesion"
-            android:exported="false" />
-        <activity
-            android:name=".Pago"
-            android:exported="false" />
-        <activity
-            android:name=".Menus.MenuSandwich"
-            android:exported="false" />
-        <activity
-            android:name=".Menus.MenuComidaRapida"
-            android:exported="false" />
-        <activity
-            android:name=".Menus.MenuPostres"
-            android:exported="false" />
-        <activity
-            android:name=".Menus.MenuFrutas"
-            android:exported="false" />
-        <activity
-            android:name=".Menus.MenuAlmuerzo"
-            android:exported="false" />
-        <activity
-            android:name=".Menus.MenuGalletas"
-            android:exported="false" />
-        <activity
-            android:name=".Menus.MenuTeCafe"
-            android:exported="false" />
-        <activity
-            android:name=".CarroCompras"
-            android:exported="false" />
-        <activity
-            android:name=".Menus.MenuBebidas"
             android:exported="false" />
         <activity
             android:name=".Menu"
