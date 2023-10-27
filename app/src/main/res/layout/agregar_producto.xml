@@ -50,11 +50,8 @@
         android:id="@+id/spinnerCategoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/white"
         android:hint="@string/categor_a_del_producto"
-        android:textColor="@color/grisoscuro"
-        android:textColorHint="@color/grisoscuro"/>
+        android:theme="@style/SpinnerStyle"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnguardar"

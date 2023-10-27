@@ -3,13 +3,12 @@ package com.example.casino
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.Spinner
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class ProductosAdapter(
-    private val productos: MutableList<Productos>
+    private val productos: MutableList<Productos>,
+    private val onProductClickListener: (String) -> Unit
 ) : RecyclerView.Adapter<ProductosAdapter.ProductoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
@@ -27,6 +26,10 @@ class ProductosAdapter(
         holder.precio.text = "Precio: $" + producto.precio.toString()
         holder.cantidad.text = "Cantidad: " + producto.cantidad.toString()
         holder.categoria.text = "Categoría: " + producto.categoria
+
+        holder.itemView.setOnClickListener {
+            onProductClickListener(producto.id)
+        }
     }
 
     override fun getItemCount(): Int {

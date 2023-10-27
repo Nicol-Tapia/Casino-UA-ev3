@@ -1,6 +1,8 @@
 package com.example.casino.BarraNav
 
 import android.os.Bundle
+import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +18,13 @@ import androidx.appcompat.widget.AppCompatSpinner
 import com.example.casino.Productos
 import com.example.casino.ProductosAdapter
 import com.example.casino.R
+import com.google.firebase.FirebaseApp
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.util.UUID
 
 class MenuFragment : Fragment() {
 
@@ -28,6 +32,17 @@ class MenuFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var productosAdapter: ProductosAdapter
     private val productosList: MutableList<Productos> = mutableListOf()
+    private val categorias = arrayOf(
+        "Bebidas",
+        "Postres",
+        "Almuerzos",
+        "Frutas",
+        "Comida Rápida",
+        "Galletas",
+        "Sandwich",
+        "Té/Café"
+    )
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,9 +51,13 @@ class MenuFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_menu, container, false)
 
         databaseReference = FirebaseDatabase.getInstance().reference.child("productos")
+        FirebaseApp.initializeApp(requireContext())
+        val database = FirebaseDatabase.getInstance()
 
         recyclerView = view.findViewById(R.id.recyclerView)
-        productosAdapter = ProductosAdapter(productosList)
+        productosAdapter = ProductosAdapter(productosList) { productKey ->
+            showProductDialog(productKey)
+        }
         recyclerView.adapter = productosAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -84,42 +103,158 @@ class MenuFragment : Fragment() {
         val spinnerCategoria = dialogView.findViewById<AppCompatSpinner>(R.id.spinnerCategoria)
         val btnGuardar = dialogView.findViewById<AppCompatButton>(R.id.btnguardar)
 
-        val categorias = arrayOf("Bebidas", "Postres", "Almuerzos", "Frutas", "Comida Rápida", "Galletas", "Sandwich", "Té/Café")
+        val categorias = arrayOf(
+            "Bebidas",
+            "Postres",
+            "Almuerzos",
+            "Frutas",
+            "Comida Rápida",
+            "Galletas",
+            "Sandwich",
+            "Té/Café"
+        )
 
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categorias)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCategoria.adapter = adapter
 
+
         val dialog = builder.create()
-
-
 
         dialog.show()
 
+
         // Configura un clic en el botón Guardar
         btnGuardar.setOnClickListener {
+            val id = UUID.randomUUID().toString()
             val nombre = editTextNombre.text.toString()
             val descripcion = editTextDescripcion.text.toString()
             val precio = editTextPrecio.text.toString().toDouble()
             val cantidad = editTextCantidad.text.toString().toInt()
             val categoria = spinnerCategoria.selectedItem.toString()
 
-            // Crea un objeto Producto con los datos ingresados
-            val producto = Productos(nombre, descripcion, precio, cantidad, categoria)
+            val producto = Productos(id, nombre, descripcion, precio, cantidad, categoria)
 
-            // Agrega el producto a la base de datos de Firebase
-            val productoKey = databaseReference.push().key
-            productoKey?.let {
-                databaseReference.child(it).setValue(producto)
-            }
+            databaseReference.child(id).setValue(producto)
+
 
             // Cierra el cuadro de diálogo
             dialog.dismiss()
 
             // Puedes mostrar un mensaje de éxito aquí
-            Toast.makeText(requireContext(), "Producto agregado con éxito", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Producto agregado con éxito", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
-}
+    private fun showProductDialog(productKey: String) {
+        val dialogView =
+            LayoutInflater.from(requireContext()).inflate(R.layout.editar_eliminar_productos, null)
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setView(dialogView)
 
+        val editTextNombre = dialogView.findViewById<AppCompatEditText>(R.id.editTextNombre)
+        val editTextDescripcion =
+            dialogView.findViewById<AppCompatEditText>(R.id.editTextDescripcion)
+        val editTextPrecio = dialogView.findViewById<AppCompatEditText>(R.id.editTextPrecio)
+        val editTextCantidad = dialogView.findViewById<AppCompatEditText>(R.id.editTextCantidad)
+        val spinnerCategoria = dialogView.findViewById<AppCompatSpinner>(R.id.spinnerCategoria)
+        val btnGuardarEdicion = dialogView.findViewById<AppCompatButton>(R.id.btnguardar_edicion)
+        val btnEliminar = dialogView.findViewById<AppCompatButton>(R.id.btn_eliminar)
+
+        val producto = productosList.find { it.id == productKey }  // Cambiado de "it.key" a "it.id"
+
+        producto?.let {
+            editTextNombre.text = Editable.Factory.getInstance().newEditable(it.nombre)
+            editTextDescripcion.text = Editable.Factory.getInstance().newEditable(it.descripcion)
+            editTextPrecio.text = Editable.Factory.getInstance().newEditable(it.precio.toString())
+            editTextCantidad.text = Editable.Factory.getInstance().newEditable(it.cantidad.toString())
+
+            val adapter =
+                ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categorias)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerCategoria.adapter = adapter
+            spinnerCategoria.setSelection(categorias.indexOf(it.categoria))
+
+            val dialog = builder.create()
+            dialog.show()
+
+            btnGuardarEdicion.setOnClickListener {
+                try {
+                    val editedNombre = editTextNombre.text.toString()
+                    val editedDescripcion = editTextDescripcion.text.toString()
+                    val editedPrecio = editTextPrecio.text.toString().toDouble()
+                    val editedCantidad = editTextCantidad.text.toString().toInt()
+                    val editedCategoria = spinnerCategoria.selectedItem.toString()
+
+                    val editedProduct = Productos(
+                        productKey,  // Mantén el productKey existente
+                        editedNombre,
+                        editedDescripcion,
+                        editedPrecio,
+                        editedCantidad,
+                        editedCategoria
+                    )
+
+                    // Actualiza el producto en la base de datos con la clave existente (productKey)
+                    databaseReference.child(productKey).setValue(editedProduct)
+
+                    val index = productosList.indexOfFirst { it.id == productKey }
+                    if (index != -1) {
+                        productosList[index] = editedProduct
+                        productosAdapter.notifyDataSetChanged()
+                    }
+
+                    dialog.dismiss()
+                    Toast.makeText(
+                        requireContext(),
+                        "Edición guardada con éxito",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Toast.makeText(
+                        requireContext(),
+                        "Error al guardar la edición",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            btnEliminar.setOnClickListener {
+                val alertDialog = AlertDialog.Builder(requireContext())
+                alertDialog.setTitle("Eliminar Producto")
+                alertDialog.setMessage("¿Está seguro de que desea eliminar este producto?")
+
+                alertDialog.setPositiveButton("Sí") { _, _ ->
+                    // Eliminar el producto de la base de datos
+                    eliminarProducto(productKey)
+                    dialog.dismiss()
+                }
+
+                alertDialog.setNegativeButton("No") { _, _ ->
+                    // No hacer nada, simplemente cerrar el diálogo
+                    dialog.dismiss()
+                }
+
+                alertDialog.show()
+            }
+        }
+    }
+
+    private fun eliminarProducto(productKey: String) {
+        Log.d("EliminarProducto", "ProductKey: $productKey")
+
+        // Elimina el producto de la base de datos
+        databaseReference.child(productKey).removeValue().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // Producto eliminado con éxito de la base de datos
+                Toast.makeText(requireContext(), "Producto eliminado con éxito", Toast.LENGTH_SHORT).show()
+
+                // Actualiza la lista y el RecyclerView
+                cargarDatosDesdeFirebase()
+            } else {
+                Toast.makeText(requireContext(), "Error al eliminar el producto", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+}

@@ -108,7 +108,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/redondo"
         android:fontFamily="@font/bree_serif"
-        android:text="@string/registrarse"
+        android:text="Guardar"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

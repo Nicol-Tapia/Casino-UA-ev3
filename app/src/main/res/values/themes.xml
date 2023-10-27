@@ -57,4 +57,16 @@
         <item name="android:background">@drawable/rectangulos</item> <!-- Fondo personalizado -->
     </style>
 
+    <style name="SpinnerStyle">
+        <item name="android:fontFamily">@font/bree_serif</item>
+        <item name="android:textColor">@color/grisoscuro</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textColorHint">@color/grisoscuro</item>
+        <item name="android:dropDownItemStyle">@style/SpinnerDropDownItem</item>
+    </style>
+    <style name="SpinnerDropDownItem">
+        <item name="android:fontFamily">@font/bree_serif</item>
+        <item name="android:textColor">@color/grisoscuro</item>
+    </style>
+
 </resources>
