@@ -52,4 +52,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="categor_a_del_producto">Categoría del producto</string>
     <string name="seleccione_una_categor_a">Seleccione una categoría</string>
+    <string name="total_price_placeholder"> Total: $%.2f</string>
+    <string name="total_price_format">Total Price: $%.2f</string>
+    <string name="hint_categoria">Seleccione categoría</string>
+
+
+
 </resources>

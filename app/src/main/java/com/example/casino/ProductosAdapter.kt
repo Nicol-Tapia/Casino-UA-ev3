@@ -7,9 +7,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class ProductosAdapter(
-    private val productos: MutableList<Productos>,
+    private var productos: List<Productos>,
     private val onProductClickListener: (String) -> Unit
 ) : RecyclerView.Adapter<ProductosAdapter.ProductoViewHolder>() {
+
+    // Método para actualizar la lista de productos
+    fun setProductos(productos: List<Productos>) {
+        this.productos = productos
+        notifyDataSetChanged()
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
         val view = LayoutInflater.from(parent.context)

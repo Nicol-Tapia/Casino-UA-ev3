@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".InicioSesion">
+    tools:context=".Usuarios.InicioSesion">
 
     <TextView
         android:id="@+id/casino_univ"
@@ -113,6 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¿Olvidaste tu contraseña?"
+        android:textColor="@color/grisoscuro"
         android:fontFamily="@font/bree_serif"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -127,6 +128,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¿No tienes una cuenta? Regístrate"
+        android:textColor="@color/grisoscuro"
         android:textSize="20sp"
         android:fontFamily="@font/bree_serif"
         app:layout_constraintStart_toStartOf="parent"

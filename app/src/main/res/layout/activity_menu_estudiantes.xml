@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Alumnos.MenuEstudiantes">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/men_princip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:clipToOutline="true" />
+
+    <TextView
+        android:id="@+id/casino_univ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/bree_serif"
+        android:gravity="bottom"
+        android:text="@string/casino_universidad"
+        android:textAppearance="@style/elige_una_o"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/image_6"
+        android:layout_width="104dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/elige_una_o"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/bree_serif"
+        android:gravity="top"
+        android:text="@string/elige_una_opci_n"
+        android:textAppearance="@style/elige_una_o"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/casino_univ" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/menubebida"
+        style="@style/Botones"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:drawableTop="@drawable/i_bebidas"
+        android:fontFamily="@font/bree_serif"
+        android:gravity="bottom|center"
+        android:paddingTop="12dp"
+        android:text="@string/bebidas"
+        android:textColor="@color/grisoscuro"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/menupostre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/elige_una_o" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/menupostre"
+        style="@style/Botones"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:drawableTop="@drawable/i_postres"
+        android:fontFamily="@font/bree_serif"
+        android:gravity="bottom|center"
+        android:paddingTop="12dp"
+        android:text="@string/postres"
+        android:textColor="@color/grisoscuro"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/menubebida"
+        app:layout_constraintTop_toBottomOf="@id/elige_una_o" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/menualmuerzos"
+        style="@style/Botones"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:drawableTop="@drawable/i_almuerzos"
+        android:fontFamily="@font/bree_serif"
+        android:gravity="bottom|center"
+        android:paddingTop="12dp"
+        android:text="@string/almuerzos"
+        android:textColor="@color/grisoscuro"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/menufrutas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menubebida" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/menufrutas"
+        style="@style/Botones"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:drawableTop="@drawable/i_frutas"
+        android:fontFamily="@font/bree_serif"
+        android:gravity="bottom|center"
+        android:paddingTop="12dp"
+        android:text="@string/frutas"
+        android:textColor="@color/grisoscuro"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/menualmuerzos"
+        app:layout_constraintTop_toBottomOf="@id/menupostre" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/menucomidarapida"
+        style="@style/Botones"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:drawableTop="@drawable/i_comrapida"
+        android:fontFamily="@font/bree_serif"
+        android:gravity="bottom|center"
+        android:lineSpacingMultiplier="0.6"
+        android:paddingTop="1dp"
+        android:text="@string/comida_nr_pida"
+        android:textColor="@color/grisoscuro"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/menupostre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menualmuerzos" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/menugalletas"
+        style="@style/Botones"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:drawableTop="@drawable/i_galletas"
+        android:fontFamily="@font/bree_serif"
+        android:gravity="bottom|center"
+        android:paddingTop="12dp"
+        android:text="@string/galletas"
+        android:textColor="@color/grisoscuro"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/menucomidarapida"
+        app:layout_constraintTop_toBottomOf="@id/menufrutas" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/menusandwich"
+        style="@style/Botones"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:drawableTop="@drawable/i_sandwich"
+        android:fontFamily="@font/bree_serif"
+        android:gravity="bottom|center"
+        android:paddingTop="12dp"
+        android:text="@string/sandwich"
+        android:textColor="@color/grisoscuro"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/menutecafe"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menucomidarapida" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/menutecafe"
+        style="@style/Botones"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:drawableTop="@drawable/i_tecafe"
+        android:fontFamily="@font/bree_serif"
+        android:gravity="bottom|center"
+        android:paddingTop="12dp"
+        android:text="@string/t_caf"
+        android:textColor="@color/grisoscuro"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/menusandwich"
+        app:layout_constraintTop_toBottomOf="@id/menugalletas" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnconf"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/conf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/elige_una_o"
+        app:layout_constraintTop_toBottomOf="@id/image_6" />
+</androidx.constraintlayout.widget.ConstraintLayout>

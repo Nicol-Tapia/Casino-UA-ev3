@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Alumnos.PagMenus.MenuBebidas">
+
+    <RelativeLayout
+        android:id="@+id/menualmuerzos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:clipToOutline="true"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/casino_univ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/bree_serif"
+        android:textSize="24sp"
+        android:text="@string/casino_universidad"
+        android:textAppearance="@style/elige_una_o"
+        android:gravity="bottom"
+        />
+    <View
+        android:id="@+id/image_6"
+        android:layout_width="104dp"
+        android:layout_height="59dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/logo"
+        />
+    <TextView
+        android:id="@+id/elige_una_o"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/casino_univ"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/bree_serif"
+        android:textSize="24sp"
+        android:text="@string/elige_una_opci_n"
+        android:textAppearance="@style/elige_una_o"
+        android:gravity="top"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/imgbebidas"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:paddingTop="12dp"
+        style="@style/Botones"
+        android:drawableTop="@drawable/i_bebidas"
+        android:text="@string/bebidas"
+        android:textColor="@color/grisoscuro"
+        android:textSize="18sp"
+        android:fontFamily="@font/bree_serif"
+        android:gravity="bottom|center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/elige_una_o"
+        />
+
+    <ScrollView
+        android:layout_width="360dp"
+        android:layout_height="293dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/btnhome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="wrap"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgbebidas">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="360dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/imgbebidas"
+            app:layout_constraintBottom_toTopOf="@+id/btnhome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </ScrollView>
+
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnhome"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="30dp"
+        android:layout_width="35.18dp"
+        android:layout_height="40dp"
+        android:background="@drawable/menucasa"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/carro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnhome"
+        android:layout_marginBottom="30dp"
+        android:layout_width="35.18dp"
+        android:layout_height="40dp"
+        android:background="@drawable/carro"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/fatras"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnhome"
+        android:layout_marginBottom="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/f_atras"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

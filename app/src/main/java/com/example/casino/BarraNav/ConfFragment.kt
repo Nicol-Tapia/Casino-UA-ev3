@@ -11,7 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
-import com.example.casino.CambioContrasenia
+import com.example.casino.Usuarios.CambioContrasenia
 import com.example.casino.MainActivity
 import com.example.casino.R
 import com.google.firebase.auth.EmailAuthProvider
@@ -63,10 +63,18 @@ class ConfFragment : Fragment() {
 
         btncerrarsesion.setOnClickListener {
             Firebase.auth.signOut()
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
+
+            // Verificar si la actividad está en un estado en el que se pueda finalizar
+            if (!requireActivity().isFinishing) {
+                // Esperar a que la actividad actual sea finalizada antes de iniciar la nueva actividad
+                requireActivity().finish()
+
+                val intent = Intent(requireContext(), MainActivity::class.java)
+                startActivity(intent)
+            }
         }
+
+
 
         btneliminarcuenta.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())

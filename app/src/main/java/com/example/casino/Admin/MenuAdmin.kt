@@ -1,15 +1,15 @@
-package com.example.casino
+package com.example.casino.Admin
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.casino.BarraNav.ConfFragment
 import com.example.casino.BarraNav.MenuFragment
+import com.example.casino.R
 import com.example.casino.databinding.ActivityMenuBinding
 
 
-class Menu : AppCompatActivity() {
+class MenuAdmin : AppCompatActivity() {
     private lateinit var binding: ActivityMenuBinding
 
 

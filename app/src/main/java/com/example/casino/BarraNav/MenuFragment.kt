@@ -1,20 +1,18 @@
 package com.example.casino.BarraNav
 
 import android.os.Bundle
-import android.text.Editable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.casino.Productos
 import com.example.casino.ProductosAdapter
 import com.example.casino.R
@@ -25,6 +23,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.util.UUID
+import android.text.Editable
 
 class MenuFragment : Fragment() {
 
@@ -43,7 +42,6 @@ class MenuFragment : Fragment() {
         "Té/Café"
     )
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +50,6 @@ class MenuFragment : Fragment() {
 
         databaseReference = FirebaseDatabase.getInstance().reference.child("productos")
         FirebaseApp.initializeApp(requireContext())
-        val database = FirebaseDatabase.getInstance()
 
         recyclerView = view.findViewById(R.id.recyclerView)
         productosAdapter = ProductosAdapter(productosList) { productKey ->
@@ -78,7 +75,13 @@ class MenuFragment : Fragment() {
                 for (dataSnapshot in snapshot.children) {
                     val producto = dataSnapshot.getValue(Productos::class.java)
                     producto?.let {
-                        productosList.add(it)
+                        // Verifica si la cantidad es mayor que 0 antes de agregarlo a la lista
+                        if (it.cantidad > 0) {
+                            productosList.add(it)
+                        } else {
+                            // Si la cantidad es 0, elimina el producto de la base de datos
+                            dataSnapshot.ref.removeValue()
+                        }
                     }
                 }
                 productosAdapter.notifyDataSetChanged()
@@ -91,8 +94,10 @@ class MenuFragment : Fragment() {
         })
     }
 
+
     private fun mostrarDialogoAgregarProducto() {
-        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.agregar_producto, null)
+        val dialogView =
+            LayoutInflater.from(requireContext()).inflate(R.layout.agregar_producto, null)
         val builder = AlertDialog.Builder(requireContext())
         builder.setView(dialogView)
 
@@ -103,48 +108,67 @@ class MenuFragment : Fragment() {
         val spinnerCategoria = dialogView.findViewById<AppCompatSpinner>(R.id.spinnerCategoria)
         val btnGuardar = dialogView.findViewById<AppCompatButton>(R.id.btnguardar)
 
-        val categorias = arrayOf(
-            "Bebidas",
-            "Postres",
-            "Almuerzos",
-            "Frutas",
-            "Comida Rápida",
-            "Galletas",
-            "Sandwich",
-            "Té/Café"
-        )
-
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categorias)
+        // Agrega el texto de selección al principio de la lista
+        val categoriasConHint = listOf(getString(R.string.hint_categoria)) + categorias
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categoriasConHint)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCategoria.adapter = adapter
-
 
         val dialog = builder.create()
 
         dialog.show()
 
-
         // Configura un clic en el botón Guardar
         btnGuardar.setOnClickListener {
-            val id = UUID.randomUUID().toString()
-            val nombre = editTextNombre.text.toString()
-            val descripcion = editTextDescripcion.text.toString()
-            val precio = editTextPrecio.text.toString().toDouble()
-            val cantidad = editTextCantidad.text.toString().toInt()
-            val categoria = spinnerCategoria.selectedItem.toString()
+            // Validar que todos los campos estén llenos
+            if (validateFields(editTextNombre, editTextDescripcion, editTextPrecio, editTextCantidad, spinnerCategoria)) {
+                val id = UUID.randomUUID().toString()
+                val nombre = editTextNombre.text.toString()
+                val descripcion = editTextDescripcion.text.toString()
+                val precio = editTextPrecio.text.toString().toDouble()
+                val cantidad = editTextCantidad.text.toString().toInt()
+                val categoria = spinnerCategoria.selectedItem.toString()
 
-            val producto = Productos(id, nombre, descripcion, precio, cantidad, categoria)
+                val producto = Productos(id, nombre, descripcion, precio, cantidad, categoria)
 
-            databaseReference.child(id).setValue(producto)
+                databaseReference.child(id).setValue(producto)
 
 
-            // Cierra el cuadro de diálogo
-            dialog.dismiss()
+                // Cierra el cuadro de diálogo
+                dialog.dismiss()
 
-            // Puedes mostrar un mensaje de éxito aquí
-            Toast.makeText(requireContext(), "Producto agregado con éxito", Toast.LENGTH_SHORT)
-                .show()
+
+                // Puedes mostrar un mensaje de éxito aquí
+                Toast.makeText(requireContext(), "Producto agregado con éxito", Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
+    }
+
+    // Método para validar que todos los campos estén llenos
+    private fun validateFields(
+        nombre: AppCompatEditText,
+        descripcion: AppCompatEditText,
+        precio: AppCompatEditText,
+        cantidad: AppCompatEditText,
+        categoria: AppCompatSpinner
+    ): Boolean {
+        if (
+            nombre.text.isNullOrBlank() ||
+            descripcion.text.isNullOrBlank() ||
+            precio.text.isNullOrBlank() ||
+            cantidad.text.isNullOrBlank() ||
+            categoria.selectedItem == null
+        ) {
+            // Mostrar un mensaje de error si algún campo está vacío
+            Toast.makeText(
+                nombre.context,
+                "Por favor, complete todos los campos",
+                Toast.LENGTH_SHORT
+            ).show()
+            return false
+        }
+        return true
     }
 
     private fun showProductDialog(productKey: String) {
@@ -162,13 +186,13 @@ class MenuFragment : Fragment() {
         val btnGuardarEdicion = dialogView.findViewById<AppCompatButton>(R.id.btnguardar_edicion)
         val btnEliminar = dialogView.findViewById<AppCompatButton>(R.id.btn_eliminar)
 
-        val producto = productosList.find { it.id == productKey }  // Cambiado de "it.key" a "it.id"
+        val producto = productosList.find { it.id == productKey }
 
         producto?.let {
-            editTextNombre.text = Editable.Factory.getInstance().newEditable(it.nombre)
-            editTextDescripcion.text = Editable.Factory.getInstance().newEditable(it.descripcion)
-            editTextPrecio.text = Editable.Factory.getInstance().newEditable(it.precio.toString())
-            editTextCantidad.text = Editable.Factory.getInstance().newEditable(it.cantidad.toString())
+            editTextNombre.text = it.nombre.toEditable()
+            editTextDescripcion.text = it.descripcion.toEditable()
+            editTextPrecio.text = it.precio.toString().toEditable()
+            editTextCantidad.text = it.cantidad.toString().toEditable()
 
             val adapter =
                 ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categorias)
@@ -188,7 +212,7 @@ class MenuFragment : Fragment() {
                     val editedCategoria = spinnerCategoria.selectedItem.toString()
 
                     val editedProduct = Productos(
-                        productKey,  // Mantén el productKey existente
+                        productKey,
                         editedNombre,
                         editedDescripcion,
                         editedPrecio,
@@ -241,9 +265,9 @@ class MenuFragment : Fragment() {
         }
     }
 
-    private fun eliminarProducto(productKey: String) {
-        Log.d("EliminarProducto", "ProductKey: $productKey")
+    private fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
+    private fun eliminarProducto(productKey: String) {
         // Elimina el producto de la base de datos
         databaseReference.child(productKey).removeValue().addOnCompleteListener { task ->
             if (task.isSuccessful) {

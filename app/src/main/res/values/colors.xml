@@ -6,5 +6,8 @@
     <color name="rojo">#D91E1E</color>
     <color name="grisoscuro">#403C38</color>
     <color name="grismedio">#A6A6A6</color>
+    <color name="colorSelected">#D8950C0C</color>
+
+
 
 </resources>

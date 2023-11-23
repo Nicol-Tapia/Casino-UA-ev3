@@ -4,9 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import com.example.casino.Usuarios.InicioSesion
+import com.example.casino.Usuarios.RegistroUsuario
 
 class MainActivity : AppCompatActivity() {
 

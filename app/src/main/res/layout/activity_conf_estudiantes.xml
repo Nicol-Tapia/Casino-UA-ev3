@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Usuarios.CambioContrasenia">
+    tools:context=".Conf_Estudiantes">
 
     <TextView
         android:id="@+id/casino_univ"
@@ -32,87 +32,75 @@
         android:background="@drawable/logo"
         />
     <TextView
-        android:id="@+id/txtcc"
+        android:id="@+id/txtconf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/casino_univ"
+        app:layout_constraintTop_toBottomOf="@id/textViewNombreUsuario"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/bree_serif"
         android:textSize="36sp"
-        android:text="Cambiar Contraseña"
+        android:text="Configuraciones"
         android:textAppearance="@style/elige_una_o"
         android:gravity="center"
         />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/contraseñaactual"
+    <TextView
+        android:id="@+id/textViewNombreUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/txtcc"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/casino_univ"
         android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:hint="Contraseña Actual"
-        android:autofillHints="emailAddress"
-        android:textColorHint="@color/grisoscuro"
-        android:textColor="@color/grisoscuro"
-        android:inputType="text"
-        android:fontFamily="@font/bree_serif"
-        android:textSize="20dp"/>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/nuevacontraseña"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/contraseñaactual"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:hint="Nueva Contraseña"
-        android:autofillHints="emailAddress"
-        android:textColorHint="@color/grisoscuro"
-        android:textColor="@color/grisoscuro"
-        android:inputType="text"
-        android:fontFamily="@font/bree_serif"
-        android:textSize="20dp"/>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/confirmarcontraseña"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/nuevacontraseña"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:hint="Confirmar Contraseña"
-        android:autofillHints="emailAddress"
-        android:textColorHint="@color/grisoscuro"
-        android:textColor="@color/grisoscuro"
-        android:inputType="text"
-        android:fontFamily="@font/bree_serif"
-        android:textSize="20dp"/>
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCambioContraseña"
+        android:id="@+id/btncerrarsesion"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="250dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/redondo"
+        android:fontFamily="@font/bree_serif"
+        android:text="Cerrar Sesión"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtconf"/>
+    />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btncambiarcontraseña"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="250dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/redondo"
         android:fontFamily="@font/bree_serif"
-        android:text="Guardar"
+        android:text="Cambiar Contraseña"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/confirmarcontraseña"/>
+        app:layout_constraintTop_toBottomOf="@id/btncerrarsesion"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btneliminarcuenta"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="250dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/redondo"
+        android:fontFamily="@font/bree_serif"
+        android:text="Eliminar Cuenta"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btncambiarcontraseña"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

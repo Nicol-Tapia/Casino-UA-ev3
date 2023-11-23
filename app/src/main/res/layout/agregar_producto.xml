@@ -14,7 +14,8 @@
         android:hint="Nombre del producto"
         android:textColor="@color/grisoscuro"
         android:textColorHint="@color/grisoscuro"
-        android:fontFamily="@font/bree_serif"/>
+        android:fontFamily="@font/bree_serif"
+        android:inputType="textCapWords"/>
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/editTextDescripcion"
@@ -23,7 +24,8 @@
         android:hint="Descripción del producto"
         android:textColor="@color/grisoscuro"
         android:textColorHint="@color/grisoscuro"
-        android:fontFamily="@font/bree_serif"/>
+        android:fontFamily="@font/bree_serif"
+        android:inputType="textCapWords"/>
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/editTextPrecio"
@@ -50,8 +52,10 @@
         android:id="@+id/spinnerCategoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/categor_a_del_producto"
+        android:background="@color/white"
+        android:hint="@string/hint_categoria"
         android:theme="@style/SpinnerStyle"/>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnguardar"

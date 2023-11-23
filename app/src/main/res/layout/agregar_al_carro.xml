@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="50dp"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/imgalmuerzos"
+        android:layout_marginTop="20dp"
+        android:paddingTop="12dp"
+        style="@style/Botones"
+        android:drawableTop="@drawable/i_almuerzos"
+        android:text="@string/almuerzos"
+        android:textColor="@color/grisoscuro"
+        android:textSize="18sp"
+        android:fontFamily="@font/bree_serif"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/nombreProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgalmuerzos"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/grisoscuro"
+        android:fontFamily="@font/bree_serif"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/descripcionProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nombreProducto"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"
+        android:textColor="@color/grisoscuro"
+        android:fontFamily="@font/bree_serif"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/precioProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descripcionProducto"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"
+        android:textColor="@color/grisoscuro"
+        android:fontFamily="@font/bree_serif"
+        android:layout_marginTop="8dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAgregarAlCarro"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="Agregar al Carro"
+        android:layout_below="@id/precioProducto"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/redondo"
+        android:fontFamily="@font/bree_serif"
+        android:textColor="@color/white"
+        />
+
+</RelativeLayout>
